@@ -33,6 +33,7 @@ public class TipCalculatorActivity extends Activity
     private Button percentDownButton;
     private TextView tipTextView;
     private TextView totalTextView;
+    private TextView name;
 
     // define the SharedPreferences object
     private SharedPreferences savedValues;
@@ -62,6 +63,7 @@ public class TipCalculatorActivity extends Activity
         percentDownButton = (Button) findViewById(R.id.percentDownButton);
         tipTextView = (TextView) findViewById(R.id.tipTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
+        name = (TextView) findViewById(R.id.name);
 
         // set the listeners
         billAmountEditText.setOnEditorActionListener(this);
@@ -76,6 +78,7 @@ public class TipCalculatorActivity extends Activity
 
         // get default SharedPreferences object
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        name.setText(prefs.getString("edit_text_preference_1"," "));
     }
 
     @Override
@@ -93,7 +96,7 @@ public class TipCalculatorActivity extends Activity
     public void onResume() {
         super.onResume();
 
-
+        name.setText(prefs.getString("edit_text_preference_1"," "));
         // get preferences
         rememberTipPercent = prefs.getBoolean("pref_forget_percent", true);
         rounding = Integer.parseInt(prefs.getString("pref_rounding", "0"));
@@ -120,7 +123,7 @@ public class TipCalculatorActivity extends Activity
     public void calculateAndDisplay() {
        Toast.makeText(getApplicationContext(), "In Calc and Display", Toast.LENGTH_LONG).show();
 
-
+        name.setText(prefs.getString("edit_text_preference_1"," "));
         // get the bill amount
         billAmountString = billAmountEditText.getText().toString();
         float billAmount;
